@@ -1,18 +1,24 @@
 setwd("C:\\Users\\AJITHNamboothiri\\Downloads")
-require(xlsx)
+install.packages("openxlsx")
+library(openxlsx)
 
 
-data = read.xlsx2("ocfs9feb.xlsx", 1) # open the file 
+myFirstFun<-function(filename,startTab,endTab)
+{
+ data = read.xlsx(filename, iter, startRow = 1) 
+ for (iter in startTab:endTab) {
 
-for (i in 2:30) {
-
-temp_data = read.xlsx2("ocfs9feb.xlsx", i) # open the file 
-
-temp <- temp_data[,3:ncol(temp_data)]
-data <- cbind(data,temp)
-
+	print(paste("Sheet = ",iter))
+	temp_data = read.xlsx(filename, iter, startRow = 1) # open the file 
+	temp <- temp_data[,3:ncol(temp_data)]
+	data <- cbind(data,temp)
+ }
+ final <- data
+ final <- final[-1,]
+ final <- final[-1,]
+ final <- final[,-1]
+ out_file = paste("out_",substr(filename, 1, nchar(filename)-5),".csv",sep = "" )
+ write.csv(final,file=out_file)
 }
-final <- data
-final <- final[-1,]
-final <- final[-1,]
-final <- final[,-1]
+myFirstFun("ocss17febFCS.xlsx",2,5)
+View(final)
