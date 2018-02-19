@@ -1,7 +1,7 @@
 setwd("C:\\Users\\AJITHNamboothiri\\Downloads")
 install.packages("openxlsx")
 library(openxlsx)
-
+iter  =1
 
 myFirstFun<-function(filename,startTab,endTab)
 {
@@ -20,3 +20,11 @@ myFirstFun<-function(filename,startTab,endTab)
 }
 myFirstFun("ocss17feb.xlsx",2,30)
 View(final)
+
+library(data.table) 
+trdf = read.csv("out_ocss17feb1.csv")
+df = transpose(trdf)
+df = df[complete.cases(df[,6]),]
+
+
+
