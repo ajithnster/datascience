@@ -1,0 +1,35 @@
+setwd("C:\\Users\\AJITHNamboothiri\\Downloads")
+install.packages("openxlsx")
+library(openxlsx)
+
+for (iter in 1:1) {
+print(paste("Sheet = ",iter))
+stat = read.xlsx("Joan Breakdowns (3).xlsx", iter, startRow = 1, colNames = TRUE) # open the file 
+start = grep("JOAN",stat[,1])
+ end = nrow(stat)
+df = stat[start:end,]
+df$leader = df[1,1]
+city = df[1,2]
+item = df[2,3]
+event = df[2,3]
+for (i in 1:nrow(df)) {
+  if (!is.na(df[i,1])) {
+    city = df[i,1]
+  }
+  else {
+    df[i,1] = city;
+  } 
+  if (!is.na(df[i,2])) {  
+    if ((df[i,2] == "LFYP")|(df[i,2] == "LFFT")|(df[i,2] == "FCS")) {
+	event = df[i,2]
+    }
+    else {
+	item = df[i,2]
+    }
+  }
+  else {
+    df[i,2] = item
+    df[i,3] = event
+  }   
+}
+}
