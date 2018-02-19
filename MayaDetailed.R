@@ -2,10 +2,10 @@ setwd("C:\\Users\\AJITHNamboothiri\\Downloads")
 install.packages("openxlsx")
 library(openxlsx)
 
-for (iter in 2:9) {
+for (iter in 2:2) {
 
 print(paste("Sheet = ",iter))
-stat = read.xlsx("2018 Detailed Statistics (1).xlsx", iter, startRow = 2, colNames = TRUE) # open the file 
+stat = read.xlsx("2018 Detailed Statistics Feb17.xlsx", iter, startRow = 2, colNames = TRUE) # open the file 
 tot_col <- ncol(stat)
 stat[,tot_col+1] = ""
 
@@ -41,7 +41,7 @@ result <- rbind(title,f1,f2)
 
 rm(f1,f2,title,fname)
 
-fname = paste("us2018Febout",iter,".csv",sep="")
+fname = paste("us2018Febout3",iter,".csv",sep="")
 write.csv(t1,fname)
 }
 
